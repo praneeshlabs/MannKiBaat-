@@ -1,0 +1,19 @@
+# Copy this file to .env and fill in the DB password.
+DB_HOST=e2e-93-86.ssdcloudindia.net
+DB_PORT=5432
+DB_USER=admin
+DB_PASSWORD=WpDaBLEf69T6r1EL$$
+DB_NAME=yt_data
+
+# Optional tuning (defaults shown)
+DB_POOL_MIN_SIZE=1
+DB_POOL_MAX_SIZE=5
+MAX_WORKERS=4
+MAX_RETRIES=5
+RETRY_BACKOFF_MIN=2
+RETRY_BACKOFF_MAX=60
+FLAT_EXTRACT_SLEEP=0.5
+VIDEO_EXTRACT_SLEEP_MIN=1.0
+VIDEO_EXTRACT_SLEEP_MAX=2.5
+STATE_DIR=state
+LOG_DIR=logs
