@@ -1,9 +1,9 @@
 # Copy this file to .env and fill in the DB password.
-DB_HOST=e2e-93-86.ssdcloudindia.net
-DB_PORT=5432
-DB_USER=admin
-DB_PASSWORD=WpDaBLEf69T6r1EL$$
-DB_NAME=yt_data
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
 
 # Optional tuning (defaults shown)
 DB_POOL_MIN_SIZE=1
