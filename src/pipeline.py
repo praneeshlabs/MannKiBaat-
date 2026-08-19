@@ -79,9 +79,51 @@ def run(resume: bool = True, only_edition: Optional[int] = None, max_workers: Op
 
     # NEW (inside run())
     playlists, channel_id = discover()
+
     if not channel_id:
-        raise RuntimeError("Could not resolve MannKiBaat channel_id from playlists page")
-    db_writer.upsert_channel(channel_id, CHANNEL_NAME, settings.CHANNEL_PLAYLISTS_URL)
+        raise RuntimeError(
+            "Could not resolve MannKiBaat channel_id from playlists page"
+        )
+
+    print("\n" + "-" * 60)
+    print("MANN KI BAAT REGIONAL-LANGUAGE PLAYLISTS")
+    print("-" * 60)
+
+    for playlist in playlists:
+    # Some playlist naming formats do not contain an edition number.
+    # Display "-" for those playlists instead of trying to format None.
+        edition_display = (
+            str(playlist["edition"])
+            if playlist.get("edition") is not None
+            else "-"
+        )
+
+        try:
+            entries = list_playlist_videos(playlist["playlist_url"])
+
+            print(
+                f"Edition {edition_display:>3} | "
+                f"{len(entries):>3} videos | "
+                f"{playlist['playlist_title']}"
+            )
+
+        except Exception as exc:
+            print(
+                f"Edition {edition_display:>3} | "
+                f"ERROR | "
+                f"{playlist['playlist_title']} | "
+                f"{exc}"
+            )
+        
+    print("-" * 60)
+    print(f"TOTAL PLAYLISTS: {len(playlists)}")
+    print("-" * 60 + "\n")
+
+    db_writer.upsert_channel(
+        channel_id,
+        CHANNEL_NAME,
+        settings.CHANNEL_PLAYLISTS_URL
+    )
 
     playlists = discover()
     if only_edition is not None:
